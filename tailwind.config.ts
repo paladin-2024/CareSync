@@ -1,6 +1,9 @@
 import type { Config } from "tailwindcss";
 
 import {fontFamily} from "tailwindcss/defaultTheme";
+const IMAGE_BASE_DIR = "/assets/images";
+type BgImageName = "appointments" | "pending" | "cancelled";
+const bgUrl = (name: BgImageName) => `url('${IMAGE_BASE_DIR}/${name}-bg.png')`;
 
 const config = {
   darkMode: ["class"],
@@ -93,9 +96,9 @@ const config = {
                 ]
   		},
   		backgroundImage: {
-  			appointments: 'url('/assets/images/appointments-bg.png')',
-  			pending: 'url('/assets/images/pending-bg.png')',
-  			cancelled: 'url('/assets/images/cancelled-bg.png')'
+  			appointments: 'bgUrl("appointments")',
+  			pending: 'bgUrl("pending")',
+  			cancelled: 'bgUrl("cancelled")'
   		},
   		keyframes: {
   			'accordion-down': {
