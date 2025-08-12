@@ -89,12 +89,10 @@ const config = {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
-  		fontFamily: {
-  			sans: [
-  				'var(--font-sans)',
-                    ...fontFamily.sans
-                ]
-  		},
+		fontFamily: {
+			satoshi: ['Satoshi', 'sans-serif'],
+			inter: ['Inter', 'sans-serif'],
+		},
   		backgroundImage: {
   			appointments: 'bgUrl("appointments")',
   			pending: 'bgUrl("pending")',
