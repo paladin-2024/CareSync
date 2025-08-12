@@ -4,11 +4,7 @@
 
 > A modern, user-friendly healthcare management system designed to streamline patient appointment scheduling.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-18-blue?logo=react)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3-cyan?logo=tailwind-css)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/) [![React](https://img.shields.io/badge/React-18-blue?logo=react)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3-cyan?logo=tailwind-css)](https://tailwindcss.com/)
 
 ---
 
@@ -16,27 +12,37 @@
 
 CareSync is a web application built with the latest technologies to provide a seamless experience for patients to manage their healthcare appointments. The project focuses on a clean, intuitive user interface and a robust backend to handle patient data securely.
 
+The current focus is on building a comprehensive patient onboarding form with reusable and scalable components.
+
 ![CareSync Onboarding Screen](public/assets/images/onboarding-img.png)
 
 ## 🚀 Key Features
 
--   **Patient Onboarding:** A simple and intuitive form for new patients to register and schedule their first appointment.
--   **Admin Dashboard:** A separate interface for administrators to manage the platform (as indicated by the `/?admin=true` link).
+-   **Dynamic Patient Form:** A multi-field form built with `React Hook Form` for patient registration.
+-   **Custom Form Fields:** A reusable `CustomFormField` component designed to handle various input types, making it easy to extend the form.
+-   **Schema-Based Validation:** Uses `Zod` to define a validation schema, ensuring data integrity before submission.
 -   **Responsive Design:** Fully responsive layout that works on all devices, from mobile phones to desktops.
--   **Dark Mode:** Beautiful dark theme for a comfortable user experience in low-light environments.
--   **Modern Tech Stack:** Built with Next.js, TypeScript, and Tailwind CSS for a fast, scalable, and maintainable application.
--   **Form Validation:** Robust client-side form validation using `Zod` and `React Hook Form`.
+-   **Dark Mode:** Beautiful dark theme for a comfortable user experience in low-light environments, powered by `next-themes`.
+-   **Admin Portal Link:** Includes a link to a future admin section.
 
 ## 🛠️ Tech Stack
 
--   **Framework:** Next.js (App Router)
+-   **Framework:** Next.js 14 (with App Router)
 -   **Language:** TypeScript
 -   **Styling:** Tailwind CSS
 -   **UI Components:** shadcn/ui
 -   **Form Management:** React Hook Form
 -   **Schema Validation:** Zod
 -   **Theming:** next-themes
--   **Fonts:** Google Fonts (`Plus Jakarta Sans`)
+-   **Fonts:** Google Fonts via `next/font` (`Plus Jakarta Sans`)
+
+## 🏗️ Form Architecture
+
+The core of the patient onboarding experience is built upon a flexible and reusable form architecture.
+
+-   **`PatientForm.tsx`**: This component acts as the main container for the form. It initializes `react-hook-form`, defines the `onSubmit` logic, and lays out the form fields.
+-   **`CustomFormField.tsx`**: This is a generic wrapper component designed to reduce boilerplate. It takes a `fieldType` enum and dynamically renders the correct input control (e.g., text input, checkbox, date picker). It's the primary building block for creating new form fields.
+-   **`Zod Schema`**: Defined within `PatientForm.tsx`, the Zod schema provides strongly-typed, declarative validation rules for all form fields, ensuring data consistency.
 
 ## 📦 Getting Started
 
@@ -53,7 +59,7 @@ Make sure you have the following installed on your system:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/caresync.git
+    git clone https://github.com/paladin-2024/caresync.git
     cd caresync
     ```
 
