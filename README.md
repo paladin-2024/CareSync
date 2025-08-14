@@ -18,8 +18,9 @@ The current focus is on building a comprehensive patient onboarding form with re
 
 ## 🚀 Key Features
 
--   **Dynamic Patient Form:** A multi-field form built with `React Hook Form` for patient registration.
+-   **Dynamic Patient Form:** A multi-field form for patient registration including name, email, and phone number.
 -   **Custom Form Fields:** A reusable `CustomFormField` component designed to handle various input types, making it easy to extend the form.
+-   **International Phone Input:** Integrated `react-phone-number-input` for a user-friendly phone number field with country code selection (defaults to Uganda 🇺🇬).
 -   **Schema-Based Validation:** Uses `Zod` to define a validation schema, ensuring data integrity before submission.
 -   **Responsive Design:** Fully responsive layout that works on all devices, from mobile phones to desktops.
 -   **Dark Mode:** Beautiful dark theme for a comfortable user experience in low-light environments, powered by `next-themes`.
@@ -33,8 +34,9 @@ The current focus is on building a comprehensive patient onboarding form with re
 -   **UI Components:** shadcn/ui
 -   **Form Management:** React Hook Form
 -   **Schema Validation:** Zod
+-   **Phone Input:** react-phone-number-input
 -   **Theming:** next-themes
--   **Fonts:** Google Fonts via `next/font` (`Plus Jakarta Sans`)
+-   **Fonts:** Custom Fonts (`Satoshi`, `Inter`)
 
 ## 🏗️ Form Architecture
 
@@ -42,7 +44,7 @@ The core of the patient onboarding experience is built upon a flexible and reusa
 
 -   **`PatientForm.tsx`**: This component acts as the main container for the form. It initializes `react-hook-form`, defines the `onSubmit` logic, and lays out the form fields.
 -   **`CustomFormField.tsx`**: This is a generic wrapper component designed to reduce boilerplate. It takes a `fieldType` enum and dynamically renders the correct input control (e.g., text input, checkbox, date picker). It's the primary building block for creating new form fields.
--   **`Zod Schema`**: Defined within `PatientForm.tsx`, the Zod schema provides strongly-typed, declarative validation rules for all form fields, ensuring data consistency.
+-   **`lib/validation.ts`**: A centralized Zod schema provides strongly-typed, declarative validation rules for all form fields, ensuring data consistency.
 
 ## 📦 Getting Started
 
