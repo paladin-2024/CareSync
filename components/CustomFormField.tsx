@@ -4,6 +4,10 @@ import {Input} from "@/components/ui/input";
 import {Control} from "react-hook-form";
 import {FormFieldType} from "@/components/forms/PatientForm";
 import React from "react";
+import Image from "next/image";
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
+
 
 interface CustomProps{
     control:Control<any>,
@@ -20,17 +24,64 @@ interface CustomProps{
     renderSkeleton?:(field: any)=> React.ReactNode,
 }
 
-const RenderInput = () =>{
-    return(
-        <Input
-            type="text"
-            placeholder="Nzabanita"
+const RenderField = ({field, props}:{field:any,props:CustomProps}) =>{
+    const {fieldType,iconSrc,iconAlt,placeholder} = props;
+    switch(fieldType){
+        case FormFieldType.INPUT:
+            return (
+                <div className="flex rounded-md border border-dark-500 bg-dark-400">
+                    {iconSrc && (
+                       <Image
+                           src={iconSrc}
+                           height={24}
+                           width={24}
+                           alt={iconAlt||'icon'}
+                           className='ml-2'
+                       />
+                    )}
+                    <FormControl>
+                        <Input
+                            {...field}
+                            placeholder={placeholder}
+                            className="sha-input border-0"
+                        />
 
-        />
-    )
+                    </FormControl>
+                </div>
+            )
+        case FormFieldType.PHONE_INPUT:
+            return (
+                <FormControl>
+                    <PhoneInput
+                        defaultCountry="UG"
+                        placeholder={placeholder}
+                        international
+                        withCountryCallingCode
+                        value={field.value as E164Number | undefined}
+
+                    />
+                </FormControl>
+            )
+
+        default:
+            break;
+
+        case FormFieldType.TEXTAREA:
+            break;
+        case FormFieldType.CHECKBOX:
+            break;
+        case FormFieldType.DATE_PICKER:
+            break;
+        case FormFieldType.SELECT:
+            break;
+        case FormFieldType.SKELETON:
+            break;
+
+    }
 }
 
-const CustomFormField = ({control,fieldType,name,label }: CustomProps) => {
+const CustomFormField = (props: CustomProps) => {
+    const {control,fieldType,name,label }=props;
     return (
         <FormField
             control={control}
@@ -41,7 +92,9 @@ const CustomFormField = ({control,fieldType,name,label }: CustomProps) => {
                         <FormLabel>{label}</FormLabel>
                     )}
 
-                    <RenderInput/>
+                    <RenderField field={field} props={props}/>
+
+                    <FormMessage className="shad-error"/>
 
                 </FormItem>
             )}
