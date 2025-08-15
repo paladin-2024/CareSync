@@ -1,6 +1,6 @@
 # CareSync 🩺
 
-![CareSync Logo](public/assets/icons/logo-full.svg)
+<p align="center"><img src="public/assets/icons/logo-full.svg" alt="CareSync Logo" width="400"/></p>
 
 > A modern, user-friendly healthcare management system designed to streamline patient appointment scheduling.
 
@@ -10,11 +10,11 @@
 
 ## ✨ Overview
 
-CareSync is a web application built with the latest technologies to provide a seamless experience for patients to manage their healthcare appointments. The project focuses on a clean, intuitive user interface and a robust backend to handle patient data securely.
+CareSync is a web application built with the latest technologies to provide a seamless experience for patients and administrators in managing healthcare appointments. The project focuses on a clean, intuitive user interface and a robust backend to handle patient data securely and efficiently.
 
 The current focus is on building a comprehensive patient onboarding form with reusable and scalable components.
 
-![CareSync Onboarding Screen](public/assets/images/onboarding-img.png)
+<p align="center"><img src="public/assets/images/onboarding-img.png" alt="CareSync Onboarding Screen" width="800"></p>
 
 ## 🚀 Key Features
 
@@ -24,12 +24,14 @@ The current focus is on building a comprehensive patient onboarding form with re
 -   **Schema-Based Validation:** Uses `Zod` to define a validation schema, ensuring data integrity before submission.
 -   **Responsive Design:** Fully responsive layout that works on all devices, from mobile phones to desktops.
 -   **Dark Mode:** Beautiful dark theme for a comfortable user experience in low-light environments, powered by `next-themes`.
--   **Admin Portal Link:** Includes a link to a future admin section.
+-   **Secure Data Handling:** Ready for integration with a secure backend to manage patient information.
+-   **Admin Dashboard:** A dedicated interface for healthcare providers to manage appointments and patient records (coming soon!).
 
 ## 🛠️ Tech Stack
 
 -   **Framework:** Next.js 14 (with App Router)
 -   **Language:** TypeScript
+-   **Backend:** Appwrite (or your choice of BaaS/backend)
 -   **Styling:** Tailwind CSS
 -   **UI Components:** shadcn/ui
 -   **Form Management:** React Hook Form
@@ -76,9 +78,15 @@ Make sure you have the following installed on your system:
 
 3.  **Set up environment variables:**
     Create a `.env.local` file in the root of the project and add any necessary environment variables.
+    
+    *Example for Appwrite:*
     ```env
     # .env.local
-    NEXT_PUBLIC_...=...
+    NEXT_PUBLIC_ENDPOINT="https://cloud.appwrite.io/v1"
+    NEXT_PUBLIC_PROJECT_ID="YOUR_PROJECT_ID"
+    NEXT_PUBLIC_API_KEY="YOUR_API_KEY"
+    NEXT_PUBLIC_DATABASE_ID="YOUR_DATABASE_ID"
+    NEXT_PUBLIC_PATIENT_COLLECTION_ID="YOUR_PATIENT_COLLECTION_ID"
     ```
 
 4.  **Run the development server:**
