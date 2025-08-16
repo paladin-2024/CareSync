@@ -10,20 +10,11 @@ import {useState} from "react";
 import {useRouter} from "next/navigation"
 import {UserFormValidation} from "@/lib/validation";
 import {createUser} from "@/lib/actions/patients.actions";
-
-export enum FormFieldType{
-    INPUT  ='input',
-    CHECKBOX = 'checkbox',
-    TEXTAREA='textarea',
-    PHONE_INPUT='phoneInput',
-    DATE_PICKER='datePicker',
-    SELECT='select',
-    SKELETON='skeleton'
-}
+import {FormFieldType} from "@/components/forms/PatientForm";
 
 
 
-const PatientForm=()=> {
+const RegisterForm=({user}:{user:User})=> {
 
     const router = useRouter();
 
@@ -51,39 +42,46 @@ const PatientForm=()=> {
     }
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
-                <section className="mb-12 space-y-4">
-                    <h1 className="header">Hi there 👋</h1>
-                    <p className="text-dark-700">Schedule your first appointment.</p>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 flex-1">
+                <section className="space-y-4">
+                    <h1 className="header">Welcome 👋</h1>
+                    <p className="text-dark-700">Let us know more about yourself.</p>
+                </section>
+
+                <section className="space-y-6">
+                   <div className="mb-9 space-y-9">
+                       <h2 className="sub-header">Personal Information</h2>
+                   </div>
                 </section>
 
                 <CustomFormField
                     fieldType={FormFieldType.INPUT}
                     control={form.control}
                     name="name"
-                    label="Full name"
-                    placeholder="Nzabanita"
+                    placeholder="Ex: Nzabanita"
                     iconSrc="/assets/icons/user.svg"
                     iconAlt="user"
                 />
 
-                <CustomFormField
-                    fieldType={FormFieldType.INPUT}
-                    control={form.control}
-                    name="email"
-                    label="Email"
-                    placeholder="nzab@gmail.com"
-                    iconSrc="/assets/icons/email.svg"
-                    iconAlt="email"
-                />
+                <div className="flex flex-col gap-6 xl:flex-row">
+                    <CustomFormField
+                        fieldType={FormFieldType.INPUT}
+                        control={form.control}
+                        name="email"
+                        label="Email"
+                        placeholder="nzab@gmail.com"
+                        iconSrc="/assets/icons/email.svg"
+                        iconAlt="email"
+                    />
 
-                <CustomFormField
-                    fieldType={FormFieldType.PHONE_INPUT}
-                    control={form.control}
-                    name="phone"
-                    label="Phone number"
-                    placeholder="+256 700000000"
-                />
+                    <CustomFormField
+                        fieldType={FormFieldType.PHONE_INPUT}
+                        control={form.control}
+                        name="phone"
+                        label="Phone number"
+                        placeholder="+256 700000000"
+                    />
+                </div>
 
                 <SubmitButton isLoading={isLoading}>
                     Get Started
@@ -92,4 +90,4 @@ const PatientForm=()=> {
         </Form>
     )
 }
-export default PatientForm
+export default RegisterForm
