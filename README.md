@@ -34,7 +34,7 @@ The current focus is on building a comprehensive patient onboarding form with re
 
 -   **Framework:** Next.js 14 (with App Router)
 -   **Language:** TypeScript
--   **Backend:** Appwrite (or your choice of BaaS/backend)
+-   **Backend:** Appwrite
 -   **Styling:** Tailwind CSS
 -   **UI Components:** shadcn/ui
 -   **Form Management:** React Hook Form
@@ -136,4 +136,6 @@ Contributions are welcome! If you have a suggestion that would make this better,
 
 ## 📄 License
 
-Distributed under the MIT License.
+Distributed under the MIT License.  `LICENSE`
+
+## 💻 Developed by Nzabanita Caleb
