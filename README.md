@@ -4,7 +4,7 @@
 
 > A modern, user-friendly healthcare management system designed to streamline patient appointment scheduling.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/) [![React](https://img.shields.io/badge/React-18-blue?logo=react)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3-cyan?logo=tailwind-css)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/) [![React](https://img.shields.io/badge/React-18-blue?logo=react)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3-cyan?logo=tailwind-css)](https://tailwindcss.com/) [![Appwrite](https://img.shields.io/badge/Appwrite-F02E65?logo=appwrite)](https://appwrite.io/) [![Zod](https://img.shields.io/badge/Zod-3E67B1?logo=zod)](https://zod.dev/)
 
 ---
 
@@ -18,14 +18,17 @@ The current focus is on building a comprehensive patient onboarding form with re
 
 ## 🚀 Key Features
 
--   **Dynamic Patient Form:** A multi-field form for patient registration including name, email, and phone number.
+-   **Patient Onboarding & Management:** A comprehensive, multi-step form for patient registration.
 -   **Custom Form Fields:** A reusable `CustomFormField` component designed to handle various input types, making it easy to extend the form.
--   **International Phone Input:** Integrated `react-phone-number-input` for a user-friendly phone number field with country code selection (defaults to Uganda 🇺🇬).
+-   **Appointment Scheduling:** An intuitive interface for patients to schedule appointments using a date and time picker.
+-   **Secure File Uploads:** Functionality for patients to upload medical documents, such as physician's notes or lab results.
 -   **Schema-Based Validation:** Uses `Zod` to define a validation schema, ensuring data integrity before submission.
 -   **Responsive Design:** Fully responsive layout that works on all devices, from mobile phones to desktops.
 -   **Dark Mode:** Beautiful dark theme for a comfortable user experience in low-light environments, powered by `next-themes`.
--   **Secure Data Handling:** Ready for integration with a secure backend to manage patient information.
--   **Admin Dashboard:** A dedicated interface for healthcare providers to manage appointments and patient records (coming soon!).
+-   **Comprehensive Admin Dashboard:** A dedicated interface for healthcare providers to:
+    -   View and manage patient data in a sortable, filterable table.
+    -   Track key metrics with statistical cards.
+    -   Update appointment statuses with clear visual badges.
 
 ## 🛠️ Tech Stack
 
@@ -36,17 +39,23 @@ The current focus is on building a comprehensive patient onboarding form with re
 -   **UI Components:** shadcn/ui
 -   **Form Management:** React Hook Form
 -   **Schema Validation:** Zod
+-   **Date & Time:** react-datepicker
 -   **Phone Input:** react-phone-number-input
 -   **Theming:** next-themes
 -   **Fonts:** Custom Fonts (`Satoshi`, `Inter`)
 
-## 🏗️ Form Architecture
+## 🏗️ Architecture
 
-The core of the patient onboarding experience is built upon a flexible and reusable form architecture.
+CareSync is built with a focus on scalability, reusability, and a clean separation of concerns.
 
--   **`PatientForm.tsx`**: This component acts as the main container for the form. It initializes `react-hook-form`, defines the `onSubmit` logic, and lays out the form fields.
--   **`CustomFormField.tsx`**: This is a generic wrapper component designed to reduce boilerplate. It takes a `fieldType` enum and dynamically renders the correct input control (e.g., text input, checkbox, date picker). It's the primary building block for creating new form fields.
--   **`lib/validation.ts`**: A centralized Zod schema provides strongly-typed, declarative validation rules for all form fields, ensuring data consistency.
+### Styling
+-   **Tailwind CSS with Custom Utilities**: We leverage Tailwind's utility-first approach and extend it with custom, reusable classes in `globals.css` using the `@layer` directive. This includes helpers for layout (`.container`), typography (`.header`), and component-specific styles (`.admin-stat`, `.data-table`).
+-   **`shadcn/ui` Overrides**: To maintain a consistent design language, we apply custom styles to our `shadcn/ui` components. These overrides (`.shad-*`) are centralized in `globals.css` for easy maintenance.
+
+### Form Handling
+-   **Reusable Components**: The `CustomFormField.tsx` component is a generic wrapper that dynamically renders various input controls (text, date pickers, file uploads) based on a `fieldType` prop, drastically reducing boilerplate.
+-   **Centralized Validation**: `lib/validation.ts` contains all Zod schemas, providing a single source of truth for strongly-typed, declarative validation rules across the application.
+-   **Server Actions**: Form submissions are handled by Next.js Server Actions, ensuring a seamless user experience without full-page reloads and keeping business logic on the server.
 
 ## 📦 Getting Started
 
