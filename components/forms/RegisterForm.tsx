@@ -189,7 +189,21 @@ const RegisterForm=({user}:{user:User})=> {
                 </CustomFormField>
 
                 <div className="flex flex-col gap-6 xl:flex-row">
+                    <CustomFormField
+                        fieldType={FormFieldType.INPUT}
+                        control={form.control}
+                        name="insuranceProvider"
+                        label="Insurance Provider"
+                        placeholder="Jubilee Health Insurance Uganda Limited"
+                    />
 
+                    <CustomFormField
+                        fieldType={FormFieldType.INPUT}
+                        control={form.control}
+                        name="insurancePolicyNumber"
+                        label="Insurance Policy Number"
+                        placeholder="UG-MED-2025-00012345"
+                    />
                 </div>
 
                 <SubmitButton isLoading={isLoading}>
