@@ -1,8 +1,8 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+import {zodResolver} from "@hookform/resolvers/zod"
+import {useForm} from "react-hook-form"
+import {z} from "zod"
 import {Form, FormControl} from "@/components/ui/form"
 import CustomFormField from "@/components/CustomFormField";
 import SubmitButton from "@/components/SubmitButton";
@@ -16,7 +16,6 @@ import {Doctors, GenderOptions, IdentificationTypes} from "@/constants";
 import Image from "next/image";
 import {SelectItem} from "@/components/ui/select";
 import {FileUploader} from "@/components/FileUploader";
-
 
 
 const RegisterForm=({user}:{user:User})=> {
@@ -282,7 +281,32 @@ const RegisterForm=({user}:{user:User})=> {
                     )}
                 />
 
+                <section className="space-y-6">
+                    <div className="mb-9 space-y-9">
+                        <h2 className="sub-header">Consent and Privacy</h2>
+                    </div>
+                </section>
+                
+                <CustomFormField
+                    control={form.control}
+                    fieldType={FormFieldType.CHECKBOX}
+                    name="treatmentConsent"
+                    label="I consent to receive treatment for my health condition"
+                />
 
+                <CustomFormField
+                    control={form.control}
+                    fieldType={FormFieldType.CHECKBOX}
+                    name="disclosureConsent"
+                    label="I consent to use and disclosure of my health information for medical purposes"
+                />
+
+                <CustomFormField
+                    control={form.control}
+                    fieldType={FormFieldType.CHECKBOX}
+                    name="privacyConsent"
+                    label="I acknowledge that i have reviewedn and agre to the orivacy policy and terms of service"
+                />
 
                 <SubmitButton isLoading={isLoading}>
                     Get Started
