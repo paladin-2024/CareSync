@@ -14,14 +14,14 @@ CareSync is a web application built with the latest technologies to provide a se
 
 The current focus is on building a comprehensive patient onboarding form with reusable and scalable components.
 
-<p align="center"><img src="public/assets/img.png" alt="CareSync Onboarding Screen" width="800"></p>
+<p align="center"><img src="public/assets/images/onboarding-img.png" alt="CareSync Onboarding Screen" width="800"></p>
 
 ## 🚀 Key Features
 
 -   **Patient Onboarding & Management:** A comprehensive, multi-step form for patient registration.
 -   **Custom Form Fields:** A reusable `CustomFormField` component designed to handle various input types, making it easy to extend the form.
 -   **Appointment Scheduling:** An intuitive interface for patients to schedule appointments using a date and time picker.
--   **Secure File Uploads:** Functionality for patients to upload medical documents, such as physician's notes or lab results.
+-   **Secure File Uploads:** A drag-and-drop interface for patients to easily upload medical documents, such as physician's notes or lab results.
 -   **Schema-Based Validation:** Uses `Zod` to define a validation schema, ensuring data integrity before submission.
 -   **Responsive Design:** Fully responsive layout that works on all devices, from mobile phones to desktops.
 -   **Dark Mode:** Beautiful dark theme for a comfortable user experience in low-light environments, powered by `next-themes`.
@@ -53,7 +53,7 @@ CareSync is built with a focus on scalability, reusability, and a clean separati
 -   **`shadcn/ui` Overrides**: To maintain a consistent design language, we apply custom styles to our `shadcn/ui` components. These overrides (`.shad-*`) are centralized in `globals.css` for easy maintenance.
 
 ### Form Handling
--   **Reusable Components**: The `CustomFormField.tsx` component is a generic wrapper that dynamically renders various input controls (text, date pickers, file uploads) based on a `fieldType` prop, drastically reducing boilerplate.
+-   **Reusable Components**: The `CustomFormField.tsx` and `FileUploader.tsx` components provide generic, reusable building blocks for forms. `CustomFormField` dynamically renders various input controls, while `FileUploader` offers a clean drag-and-drop zone, drastically reducing boilerplate.
 -   **Centralized Validation**: `lib/validation.ts` contains all Zod schemas, providing a single source of truth for strongly-typed, declarative validation rules across the application.
 -   **Server Actions**: Form submissions are handled by Next.js Server Actions, ensuring a seamless user experience without full-page reloads and keeping business logic on the server.
 
