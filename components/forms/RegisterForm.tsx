@@ -12,9 +12,10 @@ import {UserFormValidation} from "@/lib/validation";
 import {createUser} from "@/lib/actions/patients.actions";
 import {FormFieldType} from "@/components/forms/PatientForm";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
-import {Doctors, GenderOptions} from "@/constants";
+import {Doctors, GenderOptions, IdentificationTypes} from "@/constants";
 import Image from "next/image";
 import {SelectItem} from "@/components/ui/select";
+import {FileUploader} from "@/components/FileUploader";
 
 
 
@@ -242,11 +243,54 @@ const RegisterForm=({user}:{user:User})=> {
                     />
                 </div>
 
+                <section className="space-y-6">
+                    <div className="mb-9 space-y-9">
+                        <h2 className="sub-header">Identification and Verification</h2>
+                    </div>
+                </section>
+
+                <CustomFormField
+                    fieldType={FormFieldType.SELECT}
+                    control={form.control}
+                    name="identificationType"
+                    label="Identification Type"
+                    placeholder="Select an Identification Type">
+                    {[IdentificationTypes.map((type)=>(
+                        <SelectItem key={type} value={type}>
+                            {type}
+                        </SelectItem>
+                    ))]}
+                </CustomFormField>
+
+                <CustomFormField
+                    fieldType={FormFieldType.INPUT}
+                    control={form.control}
+                    name="identificationNumber"
+                    label="Identification Number"
+                    placeholder="1234567890"
+                />
+
+                <CustomFormField
+                    fieldType={FormFieldType.SKELETON}
+                    control={form.control}
+                    name="identificationDocument"
+                    label="Scanned copy of identification document"
+                    renderSkeleton={(field)=>(
+                        <FormControl>
+                            <FileUploader files={field.value} onChange={field.onChange}/>
+                        </FormControl>
+                    )}
+                />
+
+
+
                 <SubmitButton isLoading={isLoading}>
                     Get Started
                 </SubmitButton>
             </form>
         </Form>
+
+
     )
 }
 export default RegisterForm
