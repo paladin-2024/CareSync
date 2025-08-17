@@ -206,6 +206,42 @@ const RegisterForm=({user}:{user:User})=> {
                     />
                 </div>
 
+                <div className="flex flex-col gap-6 xl:flex-row">
+                    <CustomFormField
+                        fieldType={FormFieldType.TEXTAREA}
+                        control={form.control}
+                        name="allergies"
+                        label="Allergies (if any)"
+                        placeholder="Peanuts, Penicillin, Eggs, Lactose, etc."
+                    />
+
+                    <CustomFormField
+                        fieldType={FormFieldType.TEXTAREA}
+                        control={form.control}
+                        name="currentMedications"
+                        label="Current Medications (if any)"
+                        placeholder="Ibuprofen 200mg, Paracetamol 500mg, Antacids 250mg, etc."
+                    />
+                </div>
+
+                <div className="flex flex-col gap-6 xl:flex-row">
+                    <CustomFormField
+                        fieldType={FormFieldType.TEXTAREA}
+                        control={form.control}
+                        name="familyMedicalHistory"
+                        label="Family Medical History"
+                        placeholder="Mother had breast cancer"
+                    />
+
+                    <CustomFormField
+                        fieldType={FormFieldType.TEXTAREA}
+                        control={form.control}
+                        name="pastMedicalHistory"
+                        label="Past Medical History"
+                        placeholder="Diabetes, High blood pressure, etc."
+                    />
+                </div>
+
                 <SubmitButton isLoading={isLoading}>
                     Get Started
                 </SubmitButton>
