@@ -8,7 +8,7 @@ import CustomFormField from "@/components/CustomFormField";
 import SubmitButton from "@/components/SubmitButton";
 import {useState} from "react";
 import {useRouter} from "next/navigation"
-import {registerPatient} from "@/lib/actions/patients.actions";
+import {createUser, registerPatient} from "@/lib/actions/patients.actions";
 import {FormFieldType} from "@/components/forms/PatientForm";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {Doctors, GenderOptions, IdentificationTypes, PatientFormDefaultValues} from "@/constants";
@@ -25,13 +25,13 @@ const RegisterForm=({user}:{user:User})=> {
     const [isLoading, setIsLoading] = useState(false)
 
     const form = useForm<z.infer<typeof PatientFormValidation>>({
-        resolver: zodResolver(PatientFormValidation) ,
+        resolver: zodResolver(PatientFormValidation) as any,
         defaultValues: {
             ...PatientFormDefaultValues,
             name: user.name,
             email: user.email,
             phone: user.phone,
-        },
+        }
     });
 
     async function onSubmit(values: z.infer<typeof PatientFormValidation>) {
@@ -66,7 +66,7 @@ const RegisterForm=({user}:{user:User})=> {
     }
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 flex-1">
+            <form onSubmit={form.handleSubmit(onSubmit as any) } className="space-y-12 flex-1">
                 <section className="space-y-4">
                     <h1 className="header">Welcome 👋</h1>
                     <p className="text-dark-700">Let us know more about yourself.</p>
