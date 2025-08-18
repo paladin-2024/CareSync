@@ -8,7 +8,7 @@ import CustomFormField from "@/components/CustomFormField";
 import SubmitButton from "@/components/SubmitButton";
 import {useState} from "react";
 import {useRouter} from "next/navigation"
-import {createUser} from "@/lib/actions/patients.actions";
+import {registerPatient} from "@/lib/actions/patients.actions";
 import {FormFieldType} from "@/components/forms/PatientForm";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {Doctors, GenderOptions, IdentificationTypes, PatientFormDefaultValues} from "@/constants";
@@ -25,14 +25,14 @@ const RegisterForm=({user}:{user:User})=> {
     const [isLoading, setIsLoading] = useState(false)
 
     const form = useForm<z.infer<typeof PatientFormValidation>>({
-        resolver: zodResolver(PatientFormValidation),
+        resolver: zodResolver(PatientFormValidation) ,
         defaultValues: {
             ...PatientFormDefaultValues,
-            name: "",
-            email:"",
-            phone:"",
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
         },
-    })
+    });
 
     async function onSubmit(values: z.infer<typeof PatientFormValidation>) {
         setIsLoading(true);
@@ -56,6 +56,7 @@ const RegisterForm=({user}:{user:User})=> {
                 identificationDocument:formData,
             }
 
+            // @ts-ignore
             const patient = await registerPatient(patientData);
 
             if(patient) router.push(`/patients/${patient.$id}/new-appointment`)
@@ -305,7 +306,7 @@ const RegisterForm=({user}:{user:User})=> {
                         <h2 className="sub-header">Consent and Privacy</h2>
                     </div>
                 </section>
-                
+
                 <CustomFormField
                     control={form.control}
                     fieldType={FormFieldType.CHECKBOX}
