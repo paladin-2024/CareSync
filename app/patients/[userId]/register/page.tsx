@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from "next/image";
-import Link from "next/link";
 import RegisterForm from "@/components/forms/RegisterForm";
 import {getUser} from "@/lib/actions/patients.actions";
 
