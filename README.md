@@ -113,18 +113,26 @@ Open http://localhost:3000 with your browser to see the result.
 
 The project follows a standard Next.js App Router structure, with some conventions for organizing components and utilities.
 
-```
+```bash
 caresync/
-├── app/                      # Next.js App Router pages and layouts
-│   ├── layout.tsx            # Root layout
-│   └── page.tsx              # Home page
+├── app/
+│   ├── (auth)/                 # Authentication routes (e.g., sign-in)
+│   ├── (root)/                 # Main patient-facing routes
+│   │   ├── patients/[userId]/register/
+│   │   └── ...
+│   ├── admin/                  # Admin dashboard routes
+│   ├── layout.tsx              # Root layout
+│   └── page.tsx                # Landing page
 ├── components/
-│   ├── forms/                # Form-specific components (e.g., PatientForm.tsx)
-│   ├── ui/                   # Reusable UI components from shadcn/ui
-│   ├── CustomFormField.tsx   # Custom, reusable form field component
-│   └── theme-provider.tsx    # Theme provider for dark/light mode
+│   ├── forms/                  # Form-specific components (e.g., PatientForm.tsx)
+│   ├── table/                  # Components for the data table (e.g., columns.tsx)
+│   ├── ui/                     # Reusable UI components from shadcn/ui
+│   ├── CustomFormField.tsx     # Generic, reusable form field component
+│   └── FileUploader.tsx        # Drag-and-drop file upload component
 ├── lib/
-│   └── utils.ts              # Utility functions (e.g., cn for classnames)
+│   ├── actions/                # Server Actions (e.g., patient.actions.ts)
+│   ├── validation.ts           # Zod schemas
+│   └── utils.ts                # Utility functions (e.g., cn)
 ├── public/
 │   └── assets/
 └── ...
