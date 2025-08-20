@@ -25,7 +25,7 @@ const RegisterForm=({user}:{user:User})=> {
     const [isLoading, setIsLoading] = useState(false)
 
     const form = useForm<z.infer<typeof PatientFormValidation>>({
-        resolver: zodResolver(PatientFormValidation) as any,
+        resolver: zodResolver(PatientFormValidation) ,
         defaultValues: {
             ...PatientFormDefaultValues,
             name: user.name,
@@ -66,7 +66,7 @@ const RegisterForm=({user}:{user:User})=> {
     }
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit as any) } className="space-y-12 flex-1">
+            <form onSubmit={form.handleSubmit(onSubmit) } className="space-y-12 flex-1">
                 <section className="space-y-4">
                     <h1 className="header">Welcome 👋</h1>
                     <p className="text-dark-700">Let us know more about yourself.</p>
