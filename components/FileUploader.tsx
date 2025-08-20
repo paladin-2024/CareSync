@@ -1,19 +1,20 @@
-'use client'
+"use client"
 import React, {useCallback} from 'react'
 import {useDropzone} from 'react-dropzone'
 import {convertFileToUrl} from "@/lib/utils";
 import Image from "next/image";
 
 type FileUploaderProps = {
-    files: File[] | undefined,
-    onChange: (files: File[]) => void
+    files: File[] | undefined;
+    onChange: (files: File[]) => void;
 }
 
 export const FileUploader=({files, onChange}:FileUploaderProps)=> {
     const onDrop = useCallback((acceptedFiles:File[]) => {
-        onChange(acceptedFiles)
-    }, [])
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+        onChange(acceptedFiles);
+    }, []);
+
+    const {getRootProps, getInputProps} = useDropzone({onDrop});
 
     return (
         <div {...getRootProps()} className='file-upload'>
@@ -23,8 +24,8 @@ export const FileUploader=({files, onChange}:FileUploaderProps)=> {
                     src={convertFileToUrl(files[0])}
                     width={1000}
                     height={1000}
-                    className="max-h-[400] overflow-hidden object-cover"
-                    alt={"uploaded image"}                />
+                    className="max-h-[400px] overflow-hidden object-cover"
+                    alt="uploaded image"/>
             ) : (
                 <>
                     <Image
@@ -39,12 +40,12 @@ export const FileUploader=({files, onChange}:FileUploaderProps)=> {
                                 Click to upload
                             </span> or drag amd drop
                         </p>
-                        <p >
+                        <p className="text-12-regular ">
                             SVG,PNG, JPG or GIF (max 800x400)
                         </p>
                     </div>
                 </>
             )}
         </div>
-    )
-}
+    );
+};
