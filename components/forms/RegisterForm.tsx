@@ -114,8 +114,6 @@ const RegisterForm=({user}:{user:User})=> {
                         name="birthDate"
                         label="Date of Birth"
                         placeholder="Select your birth date"
-                        iconSrc="/assets/icons/email.svg"
-                        iconAlt="email"
                     />
 
                     <CustomFormField
