@@ -9,7 +9,7 @@ import SubmitButton from "@/components/SubmitButton";
 import {useState} from "react";
 import {useRouter} from "next/navigation"
 import {UserFormValidation} from "@/lib/validation";
-import {createUser} from "@/lib/actions/patients.actions";
+import {createUser} from "@/lib/actions/patient.actions";
 
 export enum FormFieldType{
     INPUT  ='input',

@@ -8,7 +8,7 @@ import CustomFormField from "@/components/CustomFormField";
 import SubmitButton from "@/components/SubmitButton";
 import {useState} from "react";
 import {useRouter} from "next/navigation"
-import {createUser, registerPatient} from "@/lib/actions/patients.actions";
+import {createUser, registerPatient} from "@/lib/actions/patient.actions";
 import {FormFieldType} from "@/components/forms/PatientForm";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {Doctors, GenderOptions, IdentificationTypes, PatientFormDefaultValues} from "@/constants";
