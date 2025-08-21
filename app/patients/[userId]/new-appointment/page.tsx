@@ -1,11 +1,13 @@
 import Image from "next/image"
 import AppointmentForm from "@/components/forms/AppointmentForm";
+import {getPatient} from "@/lib/actions/patients.actions";
 
-export default function NewAppointment() {
+export default async function NewAppointment({params:{userId}}:SearchParamProps) {
+    const patient=await getPatient(userId);
     return (
         <div className="flex h-screen max-h-screen">
             <section className='remove-scrollbar container my-auto'>
-                <div className="sub-container max-w-[560px] flex-1 justify-between">
+                <div className="sub-container max-w-[860px] flex-1 justify-between">
                     <Image
                         src="/assets/icons/logo-full.svg"
                         height={1000}
@@ -13,10 +15,14 @@ export default function NewAppointment() {
                         alt="patient"
                         className="mb-12 h-10 w-fit"
                     />
-                    <AppointmentForm/>
+                    <AppointmentForm
+                     type="create"
+                     userId={userId}
+                     patientId={patient?.$id}
+                    />
 
-                    <p className="justify-items-end text-dark-600 xl:text-left">
-                        © 2025 CarePulse
+                    <p className="copyright py-12">
+                        © 2025 CareSync
                     </p>
                 </div>
             </section>
