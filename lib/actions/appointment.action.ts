@@ -6,7 +6,15 @@ import {
 import {ID} from "node-appwrite";
 import {parseStringify} from "@/lib/utils";
 
-export const createAppointment = async (appointment: CreateAppointmentParams) => {
+export const createAppointment = async (appointment: {
+    userId: string;
+    patient: string;
+    primaryPhysician: string;
+    schedule: Date;
+    reason: string | undefined;
+    note: string | undefined;
+    status: "pending" | "scheduled" | "cancelled"
+}) => {
     try {
         const newAppointment= await databases.createDocument(
             DATABASE_ID!,
