@@ -34,7 +34,7 @@ const RegisterForm=({user}:{user:User})=> {
         }
     });
 
-    async function onSubmit(values: PatientFormValues) {
+    const onSubmit = async (values: z.infer<typeof PatientFormValidation>) =>{
         setIsLoading(true);
 
         let formData: FormData | undefined;
@@ -56,14 +56,13 @@ const RegisterForm=({user}:{user:User})=> {
             const patient = await registerPatient(patientData);
 
             if (patient) {
-                await router.push(`/patients/${patient.$id}/new-appointment`)
+                router.push(`/patients/${patient.$id}/new-appointment`)
             }
         } catch (error){
             console.log(error)
-        } finally {
-            setIsLoading(false);
         }
-    }
+        setIsLoading(false);
+    };
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 flex-1">
