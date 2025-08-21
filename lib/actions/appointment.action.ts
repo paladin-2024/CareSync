@@ -1,3 +1,4 @@
+'use server'
 import {
     APPOINTMENT_COLLECTION_ID,
     DATABASE_ID,
@@ -11,7 +12,7 @@ export const createAppointment = async (appointment: {
     patient: string;
     primaryPhysician: string;
     schedule: Date;
-    reason: string | undefined;
+    reason: string;
     note: string | undefined;
     status: "pending" | "scheduled" | "cancelled"
 }) => {
