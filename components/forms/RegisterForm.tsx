@@ -23,9 +23,8 @@ const RegisterForm=({user}:{user:User})=> {
 
     const [isLoading, setIsLoading] = useState(false)
 
-    type PatientFormValues = z.infer<typeof PatientFormValidation>;
 
-    const form = useForm<PatientFormValues>({
+    const form = useForm<z.infer<typeof PatientFormValidation>>({
         resolver: zodResolver(PatientFormValidation) ,
         defaultValues: {
             ...PatientFormDefaultValues,
