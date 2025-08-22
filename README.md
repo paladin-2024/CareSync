@@ -1,88 +1,113 @@
-# CareSync - Healthcare Management Platform
+# CareSync 🩺
 
-CareSync is a modern, web-based healthcare platform designed to streamline patient registration and appointment management. It provides a user-friendly interface for patients to manage their health information and schedule appointments with healthcare providers.
+<p align="center"><img src="public/assets/icons/logo-full.svg" alt="CareSync Logo" width="400"/></p>
 
-## ✨ Features
+> A modern, user-friendly healthcare management system designed to streamline patient appointment scheduling.
 
-Based on the current implementation, CareSync includes the following core features:
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/) [![React](https://img.shields.io/badge/React-18-blue?logo=react)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3-cyan?logo=tailwind-css)](https://tailwindcss.com/) [![Appwrite](https://img.shields.io/badge/Appwrite-F02E65?logo=appwrite)](https://appwrite.io/) [![Zod](https://img.shields.io/badge/Zod-3E67B1?logo=zod)](https://zod.dev/)
 
-### Patient Onboarding
-- **Comprehensive Registration Form:** A detailed form for new patients to register their personal, medical, and insurance information.
-- **User Data Pre-filling:** Automatically populates form fields with existing user data (name, email, phone) for a smoother experience.
-- **Document Upload:** Securely upload identification documents as part of the verification process.
-- **Consent Management:** Captures patient consent for treatment, data disclosure, and privacy policies.
+---
 
-### Appointment Management
-- **New Appointment Requests:** Patients can easily request new appointments with their chosen primary physician.
-- **Dynamic Appointment Forms:** The form adapts based on the action being performed (creating, scheduling, or canceling an appointment).
-- **Detailed Appointment Information:** Capture the reason for the visit, additional notes, and the desired appointment date and time.
-- **Appointment Cancellation:** A simple flow for canceling existing appointments with a required reason for documentation.
+## ✨ Overview
+
+CareSync is a web application built with the latest technologies to provide a seamless experience for patients and administrators in managing healthcare appointments. The project focuses on a clean, intuitive user interface and a robust backend to handle patient data securely and efficiently.
+
+The current focus is on building a comprehensive patient onboarding form with reusable and scalable components.
+
+<p align="center"><img src="public/assets/images/onboarding-img.png" alt="CareSync Onboarding Screen" width="800"></p>
+
+## 🚀 Key Features
+
+-   Patient Onboarding & Management: A comprehensive, multi-step form for patient registration.
+-   Custom Form Fields: A reusable `CustomFormField` component designed to handle various input types, making it easy to extend the form.
+-   Appointment Scheduling: An intuitive interface for patients to schedule appointments using a date and time picker.
+-   Secure File Uploads: A drag-and-drop interface for patients to easily upload medical documents, such as physician's notes or lab results.
+-   Schema-Based Validation: Uses `Zod` to define a validation schema, ensuring data integrity before submission.
+-   Responsive Design: Fully responsive layout that works on all devices, from mobile phones to desktops.
+-   Dark Mode: Beautiful dark theme for a comfortable user experience in low-light environments, powered by `next-themes`.
+-   Comprehensive Admin Dashboard: A dedicated interface for healthcare providers to:
+    -   View and manage patient data in a sortable, filterable table.
+    -   Track key metrics with statistical cards.
+    -   Update appointment statuses with clear visual badges.
 
 ## 🛠️ Tech Stack
 
-This project is built with a modern, robust, and scalable technology stack:
+-   Framework: Next.js 14 (with App Router)
+-   Language: TypeScript
+-   Backend: Appwrite
+-   Styling: Tailwind CSS
+-   UI Components: shadcn/ui
+-   Form Management: React Hook Form
+-   Schema Validation: Zod
+-   Date & Time: react-datepicker
+-   Phone Input: react-phone-number-input
+-   Theming: next-themes
+-   Fonts: Custom Fonts (`Satoshi`, `Inter`)
 
-- **Framework:** [Next.js](https://nextjs.org/) (App Router)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **UI:** [React](https://react.dev/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
-- **Form Management:** [React Hook Form](https://react-hook-form.com/)
-- **Schema Validation:** [Zod](https://zod.dev/)
-- **Backend/Database:** [Appwrite](https://appwrite.io/) (inferred from server actions and data models)
+## 🏗️ Architecture
 
-## 🚀 Getting Started
+CareSync is built with a focus on scalability, reusability, and a clean separation of concerns.
 
-To get a local copy up and running, follow these simple steps.
+### Styling
+-   Tailwind CSS with Custom Utilities: We leverage Tailwind's utility-first approach and extend it with custom, reusable classes in `globals.css` using the `@layer` directive. This includes helpers for layout (`.container`), typography (`.header`), and component-specific styles (`.admin-stat`, `.data-table`).
+-   shadcn/ui Overrides: To maintain a consistent design language, we apply custom styles to our `shadcn/ui` components. These overrides (`.shad-*`) are centralized in `globals.css` for easy maintenance.
+
+### Form Handling
+-   Reusable Components: The `CustomFormField.tsx` and `FileUploader.tsx` components provide generic, reusable building blocks for forms. `CustomFormField` dynamically renders various input controls, while `FileUploader` offers a clean drag-and-drop zone, drastically reducing boilerplate.
+-   Centralized Validation: `lib/validation.ts` contains all Zod schemas, providing a single source of truth for strongly-typed, declarative validation rules across the application.
+-   Server Actions: Form submissions are handled by Next.js Server Actions, ensuring a seamless user experience without full-page reloads and keeping business logic on the server.
+
+## 📦 Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-Make sure you have Node.js (v18 or later) and a package manager (npm, yarn, or pnpm) installed.
+Make sure you have the following installed on your system:
+-   Node.js (v18.x or later)
+-   npm, yarn, or pnpm
 
-### Installation
+### Installation & Setup
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/your-username/caresync.git
+    git clone https://github.com/paladin-2024/caresync.git
     cd caresync
     ```
 
-2.  Install NPM packages:
+2.  Install dependencies:
     ```bash
     npm install
+    # or
+    yarn install
+    # or
+    pnpm install
     ```
 
-3.  Set up your environment variables. Create a `.env.local` file in the root of your project and add the necessary configuration for your backend (e.g., Appwrite).
-    ```env
-    # .env.local.example
+3.  Set up environment variables:
+    Create a `.env.local` file in the root of the project and add any necessary environment variables.
     
-    NEXT_PUBLIC_APPWRITE_PROJECT_ID=...
-    NEXT_PUBLIC_APPWRITE_API_ENDPOINT=...
-    NEXT_PUBLIC_APPWRITE_DATABASE_ID=...
-    NEXT_PUBLIC_APPWRITE_PATIENT_COLLECTION_ID=...
-    NEXT_PUBLIC_APPWRITE_DOCTOR_COLLECTION_ID=...
-    NEXT_PUBLIC_APPWRITE_APPOINTMENT_COLLECTION_ID=...
-    NEXT_PUBLIC_APPWRITE_BUCKET_ID=...
-    NEXT_PUBLIC_APPWRITE_API_KEY=...
+    Example for Appwrite:
+    ```env
+    # .env.local
+    NEXT_PUBLIC_ENDPOINT="https://cloud.appwrite.io/v1"
+    NEXT_PUBLIC_PROJECT_ID="YOUR_PROJECT_ID"
+    NEXT_PUBLIC_API_KEY="YOUR_API_KEY"
+    NEXT_PUBLIC_DATABASE_ID="YOUR_DATABASE_ID"
+    NEXT_PUBLIC_PATIENT_COLLECTION_ID="YOUR_PATIENT_COLLECTION_ID"
     ```
 
 4.  Run the development server:
     ```bash
     npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
     ```
 
 Open http://localhost:3000 with your browser to see the result.
 
-## 📂 Project Structure
+## 📁 Project Structure
 
-The project follows a standard Next.js App Router structure. Key directories include:
-
--   `/app`: Contains all the routes, pages, and layouts.
--   `/components`: Shared React components used across the application.
-    -   `/forms`: Contains all form components like `RegisterForm.tsx` and `AppointmentForm.tsx`.
-    -   `/ui`: Contains the UI components from shadcn/ui.
--   `/lib`: Contains library functions, server actions, and utilities.
-    -   `/actions`: Server-side functions (Next.js Server Actions) for interacting with the backend.
-    -   `/validation`: Zod schemas for form validation.
--   `/constants`: Contains static data and constants used throughout the application (e.g., doctor lists, form options).
--   `/public`: Static assets like images and icons.
+The project follows a standard Next.js App Router structure, with some conventions for organizing components and utilities.
