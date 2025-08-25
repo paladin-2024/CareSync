@@ -35,6 +35,7 @@ The current focus is on building a comprehensive patient onboarding form with re
 -   Framework: Next.js 14 (with App Router)
 -   Language: TypeScript
 -   Backend: Appwrite
+-   Messaging: Twilio SMS
 -   Styling: Tailwind CSS
 -   UI Components: shadcn/ui
 -   Form Management: React Hook Form
