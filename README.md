@@ -110,5 +110,7 @@ Make sure you have the following installed on your system:
 Open http://localhost:3000 with your browser to see the result.
 
 ## 📁 Project Structure
-
 The project follows a standard Next.js App Router structure, with some conventions for organizing components and utilities.
+
+## Developed by **Nzabanita**
+
