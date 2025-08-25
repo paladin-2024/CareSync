@@ -14,7 +14,7 @@ CareSync is a web application built with the latest technologies to provide a se
 
 The current focus is on building a comprehensive patient onboarding form with reusable and scalable components.
 
-<p align="center"><img src="public/assets/images/onboarding-img.png" alt="CareSync Onboarding Screen" width="800"></p>
+<p align="center"><img src="public/assets/images/img.png" alt="CareSync Onboarding Screen" width="800"></p>
 
 ## 🚀 Key Features
 
