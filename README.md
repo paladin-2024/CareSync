@@ -2,7 +2,7 @@
 
 <p align="center"><img src="public/assets/icons/logo-full.svg" alt="CareSync Logo" width="400"/></p>
 
-> A modern, user-friendly healthcare management system designed to streamline patient appointment scheduling.
+> A modern, user-friendly healthcare platform that streamlines patient registration, appointment scheduling, and medical records, and learn to implement complex forms and SMS notifications.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/) [![React](https://img.shields.io/badge/React-18-blue?logo=react)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3-cyan?logo=tailwind-css)](https://tailwindcss.com/) [![Appwrite](https://img.shields.io/badge/Appwrite-F02E65?logo=appwrite)](https://appwrite.io/) [![Zod](https://img.shields.io/badge/Zod-3E67B1?logo=zod)](https://zod.dev/)
 
