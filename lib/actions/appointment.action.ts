@@ -1,16 +1,12 @@
 "use server";
-
-import { revalidatePath } from "next/cache";
-import { ID, Query } from "node-appwrite";
+import { ID} from "node-appwrite";
 import {
     APPOINTMENT_COLLECTION_ID,
     DATABASE_ID,
     databases,
-    messaging,
 } from "../appwrite.config";
-import { formatDateTime, parseStringify } from "../utils";
+import { parseStringify } from "../utils";
 
-//  CREATE APPOINTMENT
 export const createAppointment = async (
     appointment: CreateAppointmentParams
 ) => {
@@ -22,9 +18,8 @@ export const createAppointment = async (
             appointment
         );
 
-        revalidatePath("/admin");
         return parseStringify(newAppointment);
     } catch (error) {
-        console.error("An error occurred while creating a new appointment:", error);
+        console.error(error);
     }
 };
