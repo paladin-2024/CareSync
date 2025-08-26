@@ -1,5 +1,4 @@
 "use client"
-
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -74,8 +73,8 @@ const AppointmentForm=({
                 const appointment= await createAppointment(appointmentData);
 
                 if (appointment) {
-                    form.reset();5
-                    router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`)
+                    form.reset();
+                    router.push(`/patients/${patientId}/new-appointment/success?appointmentId=${appointment.$id}`)
                 }
             }
         } catch (error){

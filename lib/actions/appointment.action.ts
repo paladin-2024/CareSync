@@ -2,8 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { ID, Query } from "node-appwrite";
-
-
 import {
     APPOINTMENT_COLLECTION_ID,
     DATABASE_ID,
