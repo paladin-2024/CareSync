@@ -12,15 +12,13 @@ import {FormFieldType} from "@/components/forms/PatientForm";
 import {Doctors} from "@/constants";
 import {SelectItem} from "@/components/ui/select";
 import Image from "next/image";
-import { createAppointment } from "@/lib/actions/appointment.action"
-
 
 
 const AppointmentForm=({
     userId, patientId, type
 }:{
-    userId:string;
-    patientId:string;
+    userId: string;
+    patientId: string;
     type:"create"| "cancel" | "schedule";
 })=> {
 
@@ -69,7 +67,17 @@ const AppointmentForm=({
                     note: values.note,
                     status: status as Status,
                 }
-                const appointment= await createAppointment(appointmentData);
+                // Call API route instead of importing a server action in a client component
+                const res = await fetch("/api/appointments", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(appointmentData),
+                });
+                if (!res.ok) {
+                    const err = await res.text().catch(() => "");
+                    throw new Error(err || "Failed to create appointment");
+                }
+                const appointment = await res.json();
                 console.log(appointment)
                 if (appointment) {
                     form.reset();
@@ -78,8 +86,9 @@ const AppointmentForm=({
             }
         } catch (error){
             console.log(error)
+        } finally {
+            setIsLoading(false);
         }
-        setIsLoading(false);
     }
 
     let buttonLabel;
@@ -151,7 +160,7 @@ const AppointmentForm=({
                             fieldType={FormFieldType.DATE_PICKER}
                             control={form.control}
                             name="schedule"
-                            label="Expected Appointtment date"
+                            label="Expected Appointment date"
                             showTimeSelect
                             dateFormat="MM/dd/yyyy - h:mm aa"
                         />
