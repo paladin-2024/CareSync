@@ -29,8 +29,9 @@ export const createUser =async (user:CreateUserParams)=>{
                 Query.equal('email', user.email),
             ])
 
-            return documents?.users[0]
+            return documents?.users?.[0];
         }
+        throw error;
     }
 };
 
@@ -40,6 +41,7 @@ export const getUser = async (userId:string)=>{
         return parseStringify(user);
     }catch (error){
         console.log(error)
+        throw error;
     }
 };
 
@@ -53,6 +55,7 @@ export const getPatient = async (userId:string)=>{
         return parseStringify(patients.documents[0]);
     }catch (error){
         console.log(error)
+        throw error;
     }
 }
 
@@ -61,12 +64,17 @@ export const registerPatient = async ({identificationDocument, ...patient}: Regi
         let file;
 
         if(identificationDocument){
-            const inputFile = InputFile.fromBuffer(
-                identificationDocument?.get('blobFile') as Blob,
-                identificationDocument?.get('fileName') as string,
-            )
+            const blob = identificationDocument.get('blobFile') as Blob | null;
+            const fileName = identificationDocument.get('fileName') as string | null;
 
-            file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile)
+            if (blob && fileName) {
+                const arrayBuffer = await blob.arrayBuffer();
+                const inputFile = InputFile.fromBuffer(
+                    Buffer.from(arrayBuffer),
+                    fileName,
+                );
+                file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile);
+            }
         }
 
         const newPatient= await databases.createDocument(
@@ -75,7 +83,9 @@ export const registerPatient = async ({identificationDocument, ...patient}: Regi
             ID.unique(),
             {
                 identificationDocumentId: file?.$id || null,
-                identificationDocumentUrl: `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file?.$id}/view?project=${PROJECT_ID}`,
+                identificationDocumentUrl: file
+                    ? `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file.$id}/view?project=${PROJECT_ID}`
+                    : null,
                 ...patient
             }
         )
@@ -83,5 +93,6 @@ export const registerPatient = async ({identificationDocument, ...patient}: Regi
         return parseStringify(newPatient);
     } catch (error){
         console.log(error);
+        throw error;
     }
 };
