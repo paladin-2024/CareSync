@@ -28,7 +28,6 @@ const AppointmentForm=({
 
     const [isLoading, setIsLoading] = useState(false);
 
-
     const AppointmentFormValidation = getAppointmentSchema(type);
 
     const form = useForm<z.infer<typeof AppointmentFormValidation>>({
@@ -71,10 +70,10 @@ const AppointmentForm=({
                     status: status as Status,
                 }
                 const appointment= await createAppointment(appointmentData);
-
+                console.log(appointment)
                 if (appointment) {
                     form.reset();
-                    router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`)
+                    router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.id}`)
                 }
             }
         } catch (error){
