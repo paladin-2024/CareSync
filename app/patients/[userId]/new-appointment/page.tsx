@@ -1,6 +1,10 @@
 import Image from "next/image"
 import AppointmentForm from "@/components/forms/AppointmentForm";
-export default function NewAppointment() {
+import {getPatient} from "@/lib/actions/patient.actions";
+
+export default async function NewAppointment({params: {userId}}: SearchParamProps) {
+    const patient = await getPatient(userId);
+
     return (
         <div className="flex h-screen max-h-screen">
             <section className='remove-scrollbar container my-auto'>
@@ -12,7 +16,7 @@ export default function NewAppointment() {
                         alt="patient"
                         className="mb-12 h-10 w-fit"
                     />
-                    <AppointmentForm/>
+                    <AppointmentForm patientId={patient.$id} userId={patient.userId}/>
 
                     <p className="justify-items-end text-dark-600 xl:text-left">
                         © 2025 CareSync

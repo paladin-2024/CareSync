@@ -76,6 +76,12 @@ public class Patient {
     @Column(name = "identification_document_url", length = 500)
     private String identificationDocumentUrl;
 
+    @Column(name = "identification_document_filename", length = 255)
+    private String identificationDocumentFilename;
+
+    @Column(name = "identification_document_content_type", length = 100)
+    private String identificationDocumentContentType;
+
     @Column(name = "privacy_consent", nullable = false)
     private boolean privacyConsent;
 
@@ -204,6 +210,26 @@ public class Patient {
 
     public String getIdentificationDocumentUrl() {
         return identificationDocumentUrl;
+    }
+
+    public void setIdentificationDocumentUrl(String identificationDocumentUrl) {
+        this.identificationDocumentUrl = identificationDocumentUrl;
+    }
+
+    public String getIdentificationDocumentFilename() {
+        return identificationDocumentFilename;
+    }
+
+    public void setIdentificationDocumentFilename(String identificationDocumentFilename) {
+        this.identificationDocumentFilename = identificationDocumentFilename;
+    }
+
+    public String getIdentificationDocumentContentType() {
+        return identificationDocumentContentType;
+    }
+
+    public void setIdentificationDocumentContentType(String identificationDocumentContentType) {
+        this.identificationDocumentContentType = identificationDocumentContentType;
     }
 
     public boolean isPrivacyConsent() {

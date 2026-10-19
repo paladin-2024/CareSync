@@ -12,9 +12,14 @@ spring:
     open-in-view: false
   flyway:
     enabled: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 app:
   api-keys: ${API_KEYS:}
+  upload-dir: ${UPLOAD_DIR:uploads}
   rate-limit:
     max-requests: ${RATE_LIMIT_MAX_REQUESTS:60}
     window-seconds: ${RATE_LIMIT_WINDOW_SECONDS:60}

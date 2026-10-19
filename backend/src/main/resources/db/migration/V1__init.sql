@@ -28,6 +28,8 @@ create table patients (
     identification_type varchar(100),
     identification_number varchar(100),
     identification_document_url varchar(500),
+    identification_document_filename varchar(255),
+    identification_document_content_type varchar(100),
     privacy_consent boolean not null default false,
     treatment_consent boolean not null default false,
     disclosure_consent boolean not null default false,

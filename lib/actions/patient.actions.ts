@@ -1,5 +1,5 @@
 "use server"
-import {backendFetch} from "@/lib/backend-api";
+import {backendFetch, backendUpload} from "@/lib/backend-api";
 import {parseStringify} from "@/lib/utils";
 
 // Backend responses use `id`; existing forms expect Appwrite-style `$id`.
@@ -23,8 +23,6 @@ export const getUser = async (userId: string) => {
 type RegisterPatientInput = RegisterUserParams & { treatmentConsent?: boolean; disclosureConsent?: boolean };
 
 export const registerPatient = async ({identificationDocument, ...patient}: RegisterPatientInput) => {
-    // shortcut: identification document upload isn't wired to the backend yet; it's stored as null here.
-    void identificationDocument;
     const payload = {
         userId: patient.userId,
         name: patient.name,
@@ -55,5 +53,22 @@ export const registerPatient = async ({identificationDocument, ...patient}: Regi
         "/api/patients",
         {method: "POST", body: JSON.stringify(payload)}
     );
+
+    const file = identificationDocument?.get("identificationDocument") as Blob | null;
+    if (file) {
+        const uploadForm = new FormData();
+        uploadForm.append("file", file);
+        const withDocument = await backendUpload<{ id: string }>(
+            `/api/patients/${newPatient.id}/document`,
+            uploadForm
+        );
+        return parseStringify(withAppwriteId(withDocument));
+    }
+
     return parseStringify(withAppwriteId(newPatient));
+};
+
+export const getPatient = async (patientId: string) => {
+    const patient = await backendFetch<{ id: string; userId: string }>(`/api/patients/${patientId}`);
+    return parseStringify(withAppwriteId(patient));
 };
