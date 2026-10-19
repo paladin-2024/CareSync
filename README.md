@@ -34,7 +34,7 @@ The current focus is on building a comprehensive patient onboarding form with re
 
 -   Framework: Next.js 14 (with App Router)
 -   Language: TypeScript
--   Backend: Appwrite
+-   Backend: Spring Boot 3 + PostgreSQL (see `backend/`)
 -   Messaging: Twilio SMS
 -   Styling: Tailwind CSS
 -   UI Components: shadcn/ui
@@ -86,17 +86,13 @@ Make sure you have the following installed on your system:
     ```
 
 3.  Set up environment variables:
-    Create a `.env.local` file in the root of the project and add any necessary environment variables.
-    
-    Example for Appwrite:
+    Create a `.env.local` file in the root of the project pointing at the Spring Boot backend (see `backend/README.md` to run it):
     ```env
     # .env.local
-    NEXT_PUBLIC_ENDPOINT="https://cloud.appwrite.io/v1"
-    NEXT_PUBLIC_PROJECT_ID="YOUR_PROJECT_ID"
-    NEXT_PUBLIC_API_KEY="YOUR_API_KEY"
-    NEXT_PUBLIC_DATABASE_ID="YOUR_DATABASE_ID"
-    NEXT_PUBLIC_PATIENT_COLLECTION_ID="YOUR_PATIENT_COLLECTION_ID"
+    BACKEND_API_URL="http://localhost:8080"
+    BACKEND_API_KEY="dev-local-key"
     ```
+    Use the same value for `BACKEND_API_KEY` as one of the backend's `API_KEYS`.
 
 4.  Run the development server:
     ```bash

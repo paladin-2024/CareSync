@@ -1,86 +1,59 @@
 "use server"
-import {ID, Query} from "node-appwrite";
-import {
-    BUCKET_ID,
-    DATABASE_ID,
-    databases,
-    ENDPOINT,
-    PATIENT_COLLECTION_ID, PROJECT_ID,
-    storage,
-    users
-} from "@/lib/appwrite.config";
+import {backendFetch} from "@/lib/backend-api";
 import {parseStringify} from "@/lib/utils";
-import {InputFile} from "node-appwrite/file";
 
-export const createUser =async (user:CreateUserParams)=>{
-    try{
-        const newUser = await users.create(
-            ID.unique(),
-            user.email,
-            user.phone,
-            undefined,
-            user.name
-        )
-        console.log({newUser})
-        return parseStringify(newUser);
-    }catch (error: any){
-        if(error && error?.code === 409){
-            const documents =await users.list([
-                Query.equal('email', user.email),
-            ])
+// Backend responses use `id`; existing forms expect Appwrite-style `$id`.
+const withAppwriteId = <T extends { id: string }>(doc: T) => ({...doc, $id: doc.id});
 
-            return documents?.users?.[0];
-        }
-        throw error;
-    }
+export const createUser = async (user: CreateUserParams) => {
+    const newUser = await backendFetch<{ id: string; name: string; email: string; phone: string }>(
+        "/api/users",
+        {method: "POST", body: JSON.stringify(user)}
+    );
+    return parseStringify(withAppwriteId(newUser));
 };
 
-export const getUser = async (userId:string)=>{
-    try{
-        const user = await users.get(userId);
-        return parseStringify(user);
-    }catch (error){
-        console.log(error)
-        throw error;
-    }
+export const getUser = async (userId: string) => {
+    const user = await backendFetch<{ id: string; name: string; email: string; phone: string }>(
+        `/api/users/${userId}`
+    );
+    return parseStringify(withAppwriteId(user));
 };
 
+type RegisterPatientInput = RegisterUserParams & { treatmentConsent?: boolean; disclosureConsent?: boolean };
 
+export const registerPatient = async ({identificationDocument, ...patient}: RegisterPatientInput) => {
+    // shortcut: identification document upload isn't wired to the backend yet; it's stored as null here.
+    void identificationDocument;
+    const payload = {
+        userId: patient.userId,
+        name: patient.name,
+        email: patient.email,
+        phone: patient.phone,
+        birthDate: new Date(patient.birthDate).toISOString().slice(0, 10),
+        gender: patient.gender.toUpperCase(),
+        address: patient.address,
+        occupation: patient.occupation,
+        emergencyContactName: patient.emergencyContactName,
+        emergencyContactNumber: patient.emergencyContactNumber,
+        primaryPhysician: patient.primaryPhysician,
+        insuranceProvider: patient.insuranceProvider,
+        insurancePolicyNumber: patient.insurancePolicyNumber,
+        allergies: patient.allergies,
+        currentMedication: patient.currentMedication,
+        familyMedicalHistory: patient.familyMedicalHistory,
+        pastMedicalHistory: patient.pastMedicalHistory,
+        identificationType: patient.identificationType,
+        identificationNumber: patient.identificationNumber,
+        identificationDocumentUrl: null,
+        treatmentConsent: patient.treatmentConsent ?? false,
+        disclosureConsent: patient.disclosureConsent ?? false,
+        privacyConsent: patient.privacyConsent,
+    };
 
-export const registerPatient = async ({identificationDocument, ...patient}: RegisterUserParams)=>{
-    try{
-        let file;
-
-        if(identificationDocument){
-            const blob = identificationDocument.get('blobFile') as Blob | null;
-            const fileName = identificationDocument.get('fileName') as string | null;
-
-            if (blob && fileName) {
-                const arrayBuffer = await blob.arrayBuffer();
-                const inputFile = InputFile.fromBuffer(
-                    Buffer.from(arrayBuffer),
-                    fileName,
-                );
-                file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile);
-            }
-        }
-
-        const newPatient= await databases.createDocument(
-            DATABASE_ID!,
-            PATIENT_COLLECTION_ID!,
-            ID.unique(),
-            {
-                identificationDocumentId: file?.$id || null,
-                identificationDocumentUrl: file
-                    ? `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file.$id}/view?project=${PROJECT_ID}`
-                    : null,
-                ...patient
-            }
-        )
-
-        return parseStringify(newPatient);
-    } catch (error){
-        console.log(error);
-        throw error;
-    }
+    const newPatient = await backendFetch<{ id: string }>(
+        "/api/patients",
+        {method: "POST", body: JSON.stringify(payload)}
+    );
+    return parseStringify(withAppwriteId(newPatient));
 };
