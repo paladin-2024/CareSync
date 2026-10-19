@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/caresync}
+    username: ${DB_USER:caresync}
+    password: ${DB_PASSWORD:caresync}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+
+app:
+  api-keys: ${API_KEYS:}
+  rate-limit:
+    max-requests: ${RATE_LIMIT_MAX_REQUESTS:60}
+    window-seconds: ${RATE_LIMIT_WINDOW_SECONDS:60}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

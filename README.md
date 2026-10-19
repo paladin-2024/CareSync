@@ -112,5 +112,15 @@ Open http://localhost:3000 with your browser to see the result.
 ## 📁 Project Structure
 The project follows a standard Next.js App Router structure, with some conventions for organizing components and utilities.
 
+## 🧩 Backend API
+
+A Spring Boot 3 / PostgreSQL API lives in `backend/` (API-key access control, per-key rate limiting). See `backend/README.md` for setup.
+
+## 🌳 Branching
+
+- `main` — production.
+- `dev` — integration branch; feature branches merge here first, `dev` merges to `main` for releases.
+- `feature/*` — one branch per unit of work, opened against `dev`.
+
 ## Developed by **Nzabanita**
 
