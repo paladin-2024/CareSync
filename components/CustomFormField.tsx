@@ -1,4 +1,4 @@
-import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {Control} from "react-hook-form";
 import {FormFieldType} from "@/components/forms/PatientForm";
@@ -14,6 +14,7 @@ import {Checkbox} from "@/components/ui/checkbox";
 
 
 interface CustomProps{
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- shared across forms with different field-value shapes
     control:Control<any>,
     fieldType:FormFieldType,
     name:string,
@@ -21,13 +22,15 @@ interface CustomProps{
     placeholder?:string,
     iconSrc?:string,
     iconAlt?:string,
-    disabled?:string,
+    disabled?:boolean,
     dateFormat?:string,
     showTimeSelect?:boolean,
     children?:React.ReactNode,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- react-hook-form field shape varies per caller
     renderSkeleton?:(field: any)=> React.ReactNode,
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- react-hook-form field shape varies per caller
 const RenderField = ({field, props}:{field:any,props:CustomProps}) =>{
     const {fieldType,iconSrc,iconAlt,placeholder,showTimeSelect, dateFormat,renderSkeleton} = props;
     switch(fieldType){

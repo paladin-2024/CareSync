@@ -1,14 +1,14 @@
 'use client'
 
 import {zodResolver} from "@hookform/resolvers/zod"
-import {useForm} from "react-hook-form"
+import {Resolver, useForm} from "react-hook-form"
 import {z} from "zod"
 import {Form, FormControl} from "@/components/ui/form"
 import CustomFormField from "@/components/CustomFormField";
 import SubmitButton from "@/components/SubmitButton";
 import {useState} from "react";
 import {useRouter} from "next/navigation"
-import {createUser, registerPatient} from "@/lib/actions/patient.actions";
+import {registerPatient} from "@/lib/actions/patient.actions";
 import {FormFieldType} from "@/components/forms/PatientForm";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {Doctors, GenderOptions, IdentificationTypes, PatientFormDefaultValues} from "@/constants";
@@ -25,7 +25,8 @@ const RegisterForm=({user}:{user:User})=> {
 
 
     const form = useForm<z.infer<typeof PatientFormValidation>>({
-        resolver: zodResolver(PatientFormValidation) ,
+        // shortcut: zod v4 + @hookform/resolvers v5 disagree on Resolver's generic shape; cast until a resolvers upgrade fixes it.
+        resolver: zodResolver(PatientFormValidation) as unknown as Resolver<z.infer<typeof PatientFormValidation>>,
         defaultValues: {
             ...PatientFormDefaultValues,
             name: user.name,
@@ -52,7 +53,7 @@ const RegisterForm=({user}:{user:User})=> {
                 identificationDocument: formData,
             }
 
-            // @ts-ignore
+            // @ts-expect-error patientData's shape matches RegisterPatientInput at runtime
             const patient = await registerPatient(patientData);
 
             if (patient) {
